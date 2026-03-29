@@ -13,6 +13,10 @@ const userSchema = new mongoose.Schema({
         trim:true
         
     },
+    isVerified:{
+        type:Boolean,
+        default:false
+    },
     phoneNumber:{
         type:String,
         required:true,
@@ -37,6 +41,12 @@ const userSchema = new mongoose.Schema({
             return Math.round(Math.random() * 1e4)
             .toString()
             .padStart(4, 0)
+        }
+    },
+    otpExpires:{
+        type: Date,
+        default: ()=>{
+            return Date.now()+ (30 * 1000)
         }
     }
 
