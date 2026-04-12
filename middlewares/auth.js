@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 
 const Authentication = async (req, res, next)=>{
     try {
-        const token = req.headers.authorization
+        const token = req.headers.authorization.split(" ")[1]
         console.log (token)
 
         if(!token){
@@ -10,7 +10,7 @@ const Authentication = async (req, res, next)=>{
                 message:'Token not Found'
             })
         }
-        const validToken = await jwt.verify(token, process.env.SECRET_KEY,(err,data)=>{
+        const validToken = jwt.verify(token, process.env.SECRET_KEY,(err,data)=>{
             if(err){
                 console.log(err.message)
                 return res.status(500).json({
