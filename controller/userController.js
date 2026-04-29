@@ -240,4 +240,22 @@ exports.changePassword = async(req, res)=>{
         })
     }
 }
+exports.loginWithGoogle = async (req, res)=>{
+    try {
+        const token = await jwt.sign({
+            id: req.user._id, 
+            role:req.user.role
+        }, process.env.SECRET_KEY)
+
+        res.status(200).json({
+            message:'Login Succesful',
+            data:req.user.Name,
+            token
+        })
+    } catch (error) {
+        res.status(500).json({
+            message:error.message
+        })
+    }
+}
     

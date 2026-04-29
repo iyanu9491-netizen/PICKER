@@ -36,11 +36,12 @@ const userSchema = new mongoose.Schema({
     },
     otp:{
         type:String,
-        default:()=>{
-            return Math.round(Math.random() * 1e4)
-            .toString()
-            .padStart(4, "0")
-        }
+        trim:true
+        // default:()=>{
+        //     return Math.round(Math.random() * 1e4)
+        //     .toString()
+        //     .padStart(4, "0")
+        // }
     },
     otpExpires:{
         type: Date,
